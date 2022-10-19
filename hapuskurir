@@ -1,0 +1,15 @@
+<?php
+//HAPUS
+include "koneksibom.php";
+$id_kurir     = $_GET['id_kurir'];
+$result = mysqli_query($koneksi, "DELETE FROM kurir WHERE id_kurir = '$id_kurir'");
+if ($result){ ?>
+    <script language="javascript">
+            alert('Berhasil Dihapus');
+        document.location.href="datakurirbom.php";
+    </script>
+<?php
+}else {
+        trigger_error('Perintah SQL Salah: ' . $sql . ' Error: ' . $koneksi->error, E_USER_ERROR);
+}
+?>
