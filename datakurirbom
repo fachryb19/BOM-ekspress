@@ -1,0 +1,48 @@
+<!DOCTYPE html> 
+<html>
+    <head> 
+    <p align="left" style="background-color:beige;">
+        <br><br>
+        <img src="bom.png"/>
+        <br><br>
+    </p>
+    </head> 
+    <body style="background-color:burlywood;font-family:monospace;">
+    <center>
+        <font face="Doubledecker DEMO" size="15">Data Kurir</font><br><br>
+        <table border="1" cellspacing="0" width="800px" height="60px"> 
+            <tr align="center">
+            <th style="font-family:monospace;font-size=24pt">NO</th>
+            <th style="font-family:monospace;font-size=24pt">ID KURIR</th>
+            <th style="font-family:monospace;font-size=24pt">NAMA KURIR</th>
+            <th style="font-family:monospace;font-size=24pt">JENIS SERVICE</th>
+            <th style="font-family:monospace;font-size=24pt">KOTA TUJUAN</th>
+            <th style="font-family:monospace;font-size=24pt">AKSI</th>
+        <?php 
+        include 'koneksibom.php'; 
+        $pengirim = mysqli_query($koneksi, "SELECT * from kurir"); 
+        $no = 1;
+        foreach ($pengirim as $row) 
+        {
+            echo "<tr>
+            <td>$no</td> 
+            <td>" . $row['id_kurir'] . "</td> 
+            <td>" . $row['nama_kurir'] . "</td> 
+            <td>" . $row['jenis_service'] . "</td> 
+            <td>" . $row['kota_tujuan'] . "</td>
+            <td>
+            <a href='editkurirbom.php?id_kurir=$row[id_kurir]'>Edit</a> 
+            <a href='hapuskurir.php?id_kurir=$row[id_kurir]'>Delete</a>
+            </td> </tr>"; 
+            $no++; 
+        }
+        ?> 
+        </table>
+        <br><br>
+        <a href='menupetugasbom.php'><button style="background-color:beige;font-size:20px;width:150px;height:40px;">Kembali</button></a> 
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <a href='tambahkurir.php'><button style="background-color:beige;font-size:20px;width:150px;height:40px;">Tambah Kurir</button></a>
+        <br><br><br> 
+    </center>
+    </body>
+</html> 
