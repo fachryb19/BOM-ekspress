@@ -1,0 +1,40 @@
+<?php
+include 'koneksibom.php';
+
+$id_kurir        = $_GET['id_kurir'];
+$kurir           = mysqli_query($koneksi, "select * from kurir where id_kurir='$id_kurir'");
+$row             = mysqli_fetch_array($kurir);
+?>
+<!DOCTYPE html>
+<html> 
+    <head>
+    <p align="left" style="background-color:beige;">
+        <br><br>
+        <img src="bom.png"/>
+        <br><br>
+    </p>
+    </head> 
+    <body style="background-color:burlywood;">
+    <a href='datakurirbom.php'><button style="background-color:beige;font-size:20px;width:150px;height:40px;">Kembali</button></a> 
+    <center>
+        <font face="Doubledecker DEMO" size="6">Ubah Data Kurir</font><br>
+            <form method="post" action="simpankurirbom.php"> 
+                <table> 
+                    <tr><td style="font-family:monospace;font-size=24pt">ID KURIR</td><td><input type="varchar" value="<?php echo $row['id_kurir'];?>" name="id_kurir" required></td></tr> 
+                    <tr><td style="font-family:monospace;font-size=24pt">NAMA KURIR</td><td><input type="TEXT" value="<?php echo $row['nama_kurir'];?>" name="nama_kurir" required></td></tr> 
+                    <tr><td style="font-family:monospace;font-size=24pt">JENIS SERVICE</td>
+                        <td>
+                            <select name="jenis_service">   
+                            <option value="OKE (4-7 hari)">OKE (4-7 hari)</option>
+                            <option value="REGULER (2-3 hari)">REGULER (2-3 hari)</option>
+                            <option value="YES (1 hari)">YES (1 hari)</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td style="font-family:monospace;font-size=24pt">KOTA TUJUAN</td><td><input type="TEXT" value="<?php echo $row['kota_tujuan'];?>" name="kota_tujuan" required></td></tr> 
+                    <tr><td colspan="2"><button style="background-color:beige;" type="submit" value="simpan">SIMPAN</button></td></tr> 
+                </table>
+            </form> 
+    </center>
+    </body>
+</html>
