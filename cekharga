@@ -1,0 +1,40 @@
+<!DOCTYPE html> 
+<html>
+    <head> 
+    <p align="left" style="background-color:beige;">
+        <br><br>
+        <img src="bom.png"/>
+        <br><br>
+    </p>
+    </head> 
+    <body style="background-color:burlywood;font-family:monospace;">
+    <a href='menupetugasbom.php'><button style="background-color:beige;font-size:20px;width:150px;height:40px;">Kembali</button></a>
+    <center>
+        <font face="Doubledecker DEMO" size="15">Data Harga</font><br><br>
+        <table border="1" cellspacing="0" width="400px" height="150px"> 
+            <tr align="center">
+            <th style="font-family:monospace;font-size=24pt">NO</th>
+            <th style="font-family:monospace;font-size=24pt">KOTA TUJUAN</th>
+            <th style="font-family:monospace;font-size=24pt">HARGA</th>
+            <th style="font-family:monospace;font-size=24pt">AKSI</th>
+        <?php 
+        include 'koneksibom.php'; 
+        $harga = mysqli_query($koneksi, "SELECT * from harga"); 
+        $no = 1;
+        foreach ($harga as $row) 
+        {
+            echo "<tr>
+            <td>$no</td> 
+            <td>" . $row['kota_tujuan'] . "</td> 
+            <td>" . $row['harga_kg'] . " /kg</td>
+            <td>
+            <a href='ubahharga.php?kota_tujuan=$row[kota_tujuan]'>Edit</a> 
+            </tr>"; 
+            $no++; 
+        }
+        ?>
+        </table><br><br> 
+        <br><br>
+    </center>
+    </body>
+</html> 
