@@ -1,0 +1,15 @@
+<?php
+//HAPUS
+include "koneksibom.php";
+$nohp_pengirim     = $_GET['nohp_pengirim'];
+$result = mysqli_query($koneksi, "DELETE FROM pengirim WHERE nohp_pengirim = '$nohp_pengirim'");
+if ($result){ ?>
+    <script language="javascript">
+            alert('Berhasil Dihapus');
+        document.location.href="isidatapengirimbom.php";
+    </script>
+<?php
+}else {
+        trigger_error('Perintah SQL Salah: ' . $sql . ' Error: ' . $koneksi->error, E_USER_ERROR);
+}
+?>
