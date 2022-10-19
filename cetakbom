@@ -1,0 +1,32 @@
+<?php
+// memanggil library FPDF
+require('fpdf/fpdf.php');
+// intance object dan memberikan pengaturan halaman PDF
+$pdf = new FPDF('l','mm','A4');
+// membuat halaman baru
+$pdf->AddPage();
+// setting jenis font yang akan digunakan
+$pdf->SetFont('Arial','B',16);
+// mencetak string
+$pdf->Cell(190,7,'RESI PENGIRIMAN BARANG',0,1,'C');
+$pdf->SetFont('Arial','B',12);
+$pdf->Cell(190,7,'DATA PENGIRIM',0,1,'C');
+$pdf->Cell(10,7,'',0,1);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(33,6,'NO RESI',1,0);
+$pdf->Cell(33,6,'NAMA PENGIRIM',1,0);
+$pdf->Cell(30,6,'NAMA PENERIMA',1,0);
+$pdf->Cell(30,6,'ALAMAT PENERIMA',1,0);
+$pdf->Cell(20,6,'NO HP PENERIMA',1,0);
+// $pdf->Cell(23,6,'HARGA',1,0);
+$pdf->SetFont('Arial','',10);
+$connection = mysqli_connect('localhost', 'root','', 'bomexpress');
+$query="SELECT * FROM pengirim";
+			$result = mysqli_query($connection,$query);
+			$row = mysqli_fetch_array($result);
+			$besar = $row[0];
+			$query = "SELECT no_resi,nama_pengirim,nama_penerima,alamat_penerima,nohp_penerima
+			FROM pengirim WHERE no_resi='$besar'"; //You don't need a ; like you do in SQL
+			$result = mysqli_query($connection,$query);
+$pdf->Output();
+?>
