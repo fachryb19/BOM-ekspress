@@ -1,0 +1,93 @@
+<!DOCTYPE html> 
+<html>
+    <head> 
+    <p align="left" style="background-color:beige;">
+        <br><br>
+        <img src="bom.png"/>
+        <br><br>
+    </p>
+    </head> 
+    <body style="background-color:burlywood;font-family:monospace;">
+    <a href='menupetugasbom.php'><button style="background-color:beige;font-size:20px;width:150px;height:40px;">Kembali</button></a> 
+    <center>
+        <font face="Doubledecker DEMO" size="15">pencarian</font><br><br>
+        <form action="cekdata.php" method="post">
+            NO RESI <input type="varchar" name="carinoresi">
+            <input style="background-color:beige;" type="submit" value="Cari !"name="cariresi">
+            &nbsp;&nbsp;&nbsp;&nbsp; 
+            ID KURIR <input type="varchar" name="carikurirbom">
+            <input style="background-color:beige;" type="submit" value="Cari !"name="carikurir">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            STATUS <input type="text" name="caristatus">
+            <input style="background-color:beige;" type="submit" value="Cari !"name="carists">
+            <br><br>
+        </form><br><br><br>
+        <table border="1" cellspacing="0" width="400px" height="50px"> 
+            <tr align="center">
+            <th style="font-family:monospace;font-size=24pt">NO</th>
+            <th style="font-family:monospace;font-size=24pt">NO RESI</th>
+            <th style="font-family:monospace;font-size=24pt">ID KURIR</th>
+            <th style="font-family:monospace;font-size=24pt">STATUS</th>
+        <?php
+        if(isset($_POST["cariresi"]))
+        {
+            $cari1 = $_POST["carinoresi"];
+            include 'koneksibom.php'; 
+            $pencarian = mysqli_query($koneksi, "SELECT no_resi,id_kurir,datastatus from 
+            pengirim inner join kurir on pengirim.jenis_service=kurir.jenis_service and
+            pengirim.kota_tujuan=kurir.kota_tujuan where pengirim.no_resi='$cari1'"); 
+            $no = 1;
+            foreach ($pencarian as $row) 
+            {
+                echo "<tr>
+                <td>" . $no ."</td> 
+                <td>" . $row['no_resi'] . " </td>
+                <td>" . $row['id_kurir'] . " </td>
+                <td>" . $row['datastatus'] . "</td>  
+                </tr>";
+                $no++; 
+            }
+        }
+        if(isset($_POST["carikurir"]))
+        {
+            $cari2 = $_POST["carikurirbom"];
+            include 'koneksibom.php'; 
+            $pencarian = mysqli_query($koneksi, "SELECT no_resi,id_kurir,datastatus from 
+            pengirim inner join kurir on pengirim.jenis_service=kurir.jenis_service and
+            pengirim.kota_tujuan=kurir.kota_tujuan where kurir.id_kurir='$cari2'"); 
+            $no = 1;
+            foreach ($pencarian as $row) 
+            {
+                echo "<tr>
+                <td>" . $no ."</td> 
+                <td>" . $row['no_resi'] . " </td>
+                <td>" . $row['id_kurir'] . " </td>
+                <td>" . $row['datastatus'] . "</td>  
+                </tr>";
+                $no++; 
+            }
+        }
+        if(isset($_POST["carists"]))
+        {
+            $cari3 = $_POST["caristatus"];
+            include 'koneksibom.php'; 
+            $pencarian = mysqli_query($koneksi, "SELECT no_resi,id_kurir,datastatus from 
+            pengirim inner join kurir on pengirim.jenis_service=kurir.jenis_service and
+            pengirim.kota_tujuan=kurir.kota_tujuan where pengirim.datastatus='$cari3'"); 
+            $no = 1;
+            foreach ($pencarian as $row) 
+            {
+                echo "<tr>
+                <td>" . $no ."</td> 
+                <td>" . $row['no_resi'] . " </td>
+                <td>" . $row['id_kurir'] . " </td>
+                <td>" . $row['datastatus'] . "</td>  
+                </tr>";
+                $no++; 
+            }
+        }
+        ?>
+        </table><br><br><br>
+    </center>
+    </body>
+</html> 
