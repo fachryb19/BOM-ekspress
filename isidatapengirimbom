@@ -1,0 +1,105 @@
+<!DOCTYPE html> 
+<html>
+    <head> 
+    <p align="center" style="background-color:beige">
+        <br><br>
+        <font face="Doubledecker DEMO" size="20">Database BOM EXPRESS</font>
+        <br><br>
+    </p>
+    </head> 
+        <body style="background-color:burlywood;">
+        <a href='menupetugasbom.php'><button style="background-color:beige;font-size:20px;width:150px;height:40px;">Kembali</button></a> 
+        <br><br>
+        <center>
+        <font face="Doubledecker DEMO" size="6">Diisi oleh Petugas</font><br>
+        <br>    
+            <form method="post" action="simpanpengirimbom.php"> 
+                <table> 
+                    <tr><td style="font-family:monospace;font-size=24pt">NAMA PENGIRIM</td><td><input type="text" name="nama_pengirim" required></td></tr> 
+                    <tr><td style="font-family:monospace;font-size=24pt">NO HP PENGIRIM</td><td><input type="int" name="nohp_pengirim" required></td></tr> 
+                    <tr><td style="font-family:monospace;font-size=24pt">NAMA PENERIMA</td><td><input type="text" name="nama_penerima" required></td></tr> 
+                    <tr><td style="font-family:monospace;font-size=24pt">ALAMAT PENERIMA</td><td><input type="varchar" name="alamat_penerima" required></td></tr> 
+                    <tr><td style="font-family:monospace;font-size=24pt">NO HP PENERIMA</td><td><input type="int" name="nohp_penerima" required></td></tr>  
+                    <tr><td style="font-family:monospace;font-size=24pt">JENIS BARANG</td>
+                        <td>
+                            <select name="jenis_barang">   
+                            <option value="Pecah Belah">Pecah Belah</option>
+                            <option value="Elektronik">Elektronik</option>
+                            <option value="Makanan">Makanan</option>
+                            <option value="Make Up">Make Up</option>
+                            <option value="Pakaian">Pakaian</option>
+                            <option value="Dokumen Penting">Dokumen Penting</option>
+                            <option value="Obat-obatan">Obat-obatan</option>
+                            <option value="Lain-lain">Lain-lain</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td style="font-family:monospace;font-size=24pt">JENIS SERVICE</td>
+                        <td>
+                            <select name="jenis_service">   
+                            <option value="OKE (4-7 hari)">OKE (4-7 hari)</option>
+                            <option value="REGULER (2-3 hari)">REGULER (2-3 hari)</option>
+                            <option value="YES (1 hari)">YES (1 hari)</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td style="font-family:monospace;font-size=24pt">BERAT BARANG</td><td><input type="number" name="berat_barang" min="1" max="1000" required> /kg</td></tr>
+                    <tr><td style="font-family:monospace;font-size=24pt">TANGGAL MASUK</td><td><input type="date" name="tanggal_masuk"required></td></tr>
+                    <tr><td style="font-family:monospace;font-size=24pt">NO RESI</td><td><input type="varchar" name="no_resi" required></td></tr> 
+                    <tr><td style="font-family:monospace;font-size=24pt">KOTA TUJUAN</td>
+                        <td>
+                            <select name="kota_tujuan">   
+                            <option value="SURABAYA">SURABAYA</option>
+                            <option value="YOGYAKARTA">YOGYAKARTA</option>
+                            <option value="BANDUNG">BANDUNG</option>
+                            <option value="JAKARTA">JAKARTA</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td colspan="2"><button style="background-color:beige;" type="submit" value="simpan">SIMPAN</button></td></tr> 
+                </table>
+            </form><br><br> 
+        <font face="Doubledecker DEMO" size="15">Data Pengiriman</font><br><br>
+        <table border="1" cellspacing="0" width="1200px" height="60px"> 
+            <tr align="center">
+            <th style="font-family:monospace;font-size=24pt">NO</th>
+            <th style="font-family:monospace;font-size=24pt">NAMA PENGIRIM</th>
+            <th style="font-family:monospace;font-size=24pt">NO HP PENGIRIM</th>
+            <th style="font-family:monospace;font-size=24pt">NAMA PENERIMA</th>
+            <th style="font-family:monospace;font-size=24pt">ALAMAT PENERIMA</th>
+            <th style="font-family:monospace;font-size=24pt">NO HP PENERIMA</th>
+            <th style="font-family:monospace;font-size=24pt">JENIS BARANG</th>
+            <th style="font-family:monospace;font-size=24pt">JENIS SERVICE</th>
+            <th style="font-family:monospace;font-size=24pt">BERAT BARANG</th>
+            <th style="font-family:monospace;font-size=24pt">TANGGAL MASUK</th>
+            <th style="font-family:monospace;font-size=24pt">NO RESI</th>
+            <th style="font-family:monospace;font-size=24pt">STATUS</th>
+            <th style="font-family:monospace;font-size=24pt">AKSI</th>
+            
+        <?php 
+        include 'koneksibom.php'; 
+        $pengirim = mysqli_query($koneksi, "SELECT * from pengirim"); 
+        $no = 1;
+        foreach ($pengirim as $row) 
+        {
+            echo "<tr>
+            <td>$no</td> 
+            <td>" . $row['nama_pengirim'] . "</td> 
+            <td>" . $row['nohp_pengirim'] . "</td> 
+            <td>" . $row['nama_penerima'] . "</td> 
+            <td>" . $row['alamat_penerima'] . "</td> 
+            <td>" . $row['nohp_penerima'] . "</td> 
+            <td>" . $row['jenis_barang'] . "</td> 
+            <td>" . $row['jenis_service'] . "</td>
+            <td>" . $row['berat_barang'] . " kg </td>  
+            <td>" . $row['tanggal_masuk'] . " </td>     
+            <td>" . $row['no_resi'] . " </td>  
+            <td>" . $row['datastatus'] . " </td>  
+            <td>
+            <a href='ubahdatapengirimupdatebom.php?nohp_pengirim=$row[nohp_pengirim]'>Edit</a> 
+            <a href='hapuspengirim.php?nohp_pengirim=$row[nohp_pengirim]'>Delete</a>
+            </td> </tr>"; 
+            $no++; 
+        }
+        ?> 
+        </table>
