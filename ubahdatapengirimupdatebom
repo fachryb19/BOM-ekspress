@@ -1,0 +1,71 @@
+<?php
+include 'koneksibom.php';
+
+$nohp_pengirim   = $_GET['nohp_pengirim'];
+$pengirim        = mysqli_query($koneksi, "select * from pengirim where nohp_pengirim='$nohp_pengirim'");
+$row             = mysqli_fetch_array($pengirim);
+?>
+<!DOCTYPE html>
+<html> 
+    <head>
+    <p align="left" style="background-color:beige;">
+        <br><br>
+        <img src="bom.png"/>
+        <br><br>
+    </p>
+    </head> 
+    <body style="background-color:burlywood;">
+    <a href='menupetugasbom.php'><button style="background-color:beige;font-size:20px;width:150px;height:40px;">Kembali</button></a> 
+    <center>
+        <font face="Doubledecker DEMO" size="6">Ubah Data Pengirim</font><br><br>
+        <form method="post" action="ubahdatapengirimbom.php">
+            <input type="hidden" value="<?php echo $row['nohp_pengirim'];?>" name="nohp_pengirim">
+            <table> 
+                    <tr><td>NAMA PENGIRIM</td><td><input type="text" value="<?php echo $row['nama_pengirim'];?>" name="nama_pengirim" required></td></tr> 
+                    <tr><td>NO HP PENGIRIM</td><td><input type="int" value="<?php echo $row['nohp_pengirim'];?>" name="nohp_pengirim" required></td></tr> 
+                    <tr><td>NAMA PENERIMA</td><td><input type="text" value="<?php echo $row['nama_penerima'];?>" name="nama_penerima" required></td></tr> 
+                    <tr><td>ALAMAT PENERIMA</td><td><input type="varchar" value="<?php echo $row['alamat_penerima'];?>" name="alamat_penerima" required></td></tr> 
+                    <tr><td>NO HP PENERIMA</td><td><input type="int" value="<?php echo $row['nohp_penerima'];?>" name="nohp_penerima" required></td></tr>  
+                    <tr><td>JENIS BARANG</td>
+                        <td>
+                            <select value="<?php echo $row['jenis_barang'];?>" name="jenis_barang">   
+                            <option value="Pecah Belah">Pecah Belah</option>
+                            <option value="Elektronik">Elektronik</option>
+                            <option value="Makanan">Makanan</option>
+                            <option value="Make Up">Make Up</option>
+                            <option value="Pakaian">Pakaian</option>
+                            <option value="Dokumen Penting">Dokumen Penting</option>
+                            <option value="Obat-obatan">Obat-obatan</option>
+                            <option value="Lain-lain">Lain-lain</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td>JENIS SERVICE</td>
+                        <td>
+                            <select value="<?php echo $row['jenis_service'];?>" name="jenis_service">   
+                            <option value="OKE (4-7 hari)">OKE (4-7 hari)</option>
+                            <option value="REGULER (2-3 hari)">REGULER (2-3 hari)</option>
+                            <option value="YES (1 hari)">YES (1 hari)</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td>BERAT BARANG</td><td><input type="number" value="<?php echo $row['berat_barang'];?>" name="berat_barang" min="1" max="1000" required> /kg</td></tr>
+                    <tr><td>TANGGAL MASUK</td><td><input type="date" value="<?php echo $row['tanggal_masuk'];?>" name="tanggal_masuk"required></td></tr>
+                    <tr><td>NO RESI</td><td><input type="varchar" value="<?php echo $row['no_resi'];?>" name="no_resi" required></td></tr> 
+                    <tr><td>KOTA TUJUAN</td>
+                        <td>
+                            <select name="kota_tujuan">   
+                            <option value="SURABAYA">SURABAYA</option>
+                            <option value="YOGYAKARTA">YOGYAKARTA</option>
+                            <option value="BANDUNG">BANDUNG</option>
+                            <option value="JAKARTA">JAKARTA</option>
+                            </select>
+                        </td>
+                    </tr>
+                <tr><td colspan="2"><button type="submit" value="simpan">SIMPAN PERUBAHAN</button> 
+            </table>
+        </form>
+        <br><br>
+    </center>
+    </body>
+</html>
