@@ -1,0 +1,34 @@
+<?php 
+
+include 'koneksibom.php'; 
+
+// menyimpan data kedalam variabel 
+$nama_pengirim    = $_POST['nama_pengirim']; 
+$nohp_pengirim    = $_POST['nohp_pengirim']; 
+$nama_penerima    = $_POST['nama_penerima']; 
+$alamat_penerima  = $_POST['alamat_penerima'];
+$nohp_penerima    = $_POST['nohp_penerima']; 
+$jenis_barang     = $_POST['jenis_barang']; 
+$jenis_service    = $_POST['jenis_service']; 
+$berat_barang     = $_POST['berat_barang'];
+$no_resi          = $_POST['no_resi'];
+$kota_tujuan          = $_POST['kota_tujuan'];
+
+// query SQL untuk insert data 
+$query="UPDATE pengirim SET 
+nama_pengirim='$nama_pengirim',
+nohp_pengirim='$nohp_pengirim',
+nama_penerima='$nama_penerima ',
+alamat_penerima='$alamat_penerima ',
+nohp_penerima='$nohp_penerima',
+jenis_barang='$jenis_barang',
+jenis_service='$jenis_service',
+berat_barang='$berat_barang',
+no_resi='$no_resi',
+kota_tujuan='$kota_tujuan'
+where 
+nohp_pengirim='$nohp_pengirim'";
+mysqli_query($koneksi, $query); 
+// mengalihkan ke halaman kaiindexpenumpang.php 
+header("location:isidatapengirimbom.php"); 
+?>
