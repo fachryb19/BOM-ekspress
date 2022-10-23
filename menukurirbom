@@ -1,0 +1,50 @@
+<!DOCTYPE html> 
+<html>
+    <head> 
+    <p align="left" style="background-color:beige;">
+        <br><br>
+        <img src="bom.png"/>
+        <br><br>
+    </p>
+    </head> 
+    <body style="background-color:burlywood;font-family:monospace;">
+    <center>
+        <br><br><font size=5pt>Silahkan Masukkan ID KURIR Anda</font> <br><br>
+        <form action="menukurirbom.php" method="post">
+            <br><br><input type="varchar" name="cariidkurir"><br/><br/> 
+            <input style="background-color:beige"; type="submit" value="Cari !"name="cari">
+        </form><br><br><br>
+        <h1>Data Pengiriman</h1>
+        <table border="1" cellspacing="0" width="1000px" height="80px"> 
+            <tr align="center">
+            <th style="font-family:monospace;font-size=24pt">NO</th>
+            <th style="font-family:monospace;font-size=24pt">ID KURIR</th>
+            <th style="font-family:monospace;font-size=24pt">NO RESI</th>
+            <th style="font-family:monospace;font-size=24pt">STATUS</th>
+            <th style="font-family:monospace;font-size=24pt">AKSI</th>
+        <?php
+        if(isset($_POST["cari"]))
+        {
+            $carikurir = $_POST["cariidkurir"];
+            include 'koneksibom.php'; 
+            $kurir = mysqli_query($koneksi, "SELECT id_kurir,no_resi,datastatus 
+            from pengirim right outer join kurir on pengirim.jenis_service=kurir.jenis_service
+            and pengirim.kota_tujuan=kurir.kota_tujuan where kurir.id_kurir='$carikurir'"); 
+            $no = 1;
+            foreach ($kurir as $row) 
+            {
+                echo "<tr>
+                <td>" . $no ."</td> 
+                <td>" . $row['id_kurir'] . " </td>
+                <td>" . $row['no_resi'] . " </td>  
+                <td>" . $row['datastatus'] . "</td>
+                <td>
+                <a href='ubahstatus.php?no_resi=$row[no_resi]'>Edit</a> 
+                </td> </tr>"; 
+                $no++; 
+            }
+        }
+        ?> 
+    </center>
+    </body> 
+</html>
