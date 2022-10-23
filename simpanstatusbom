@@ -1,0 +1,17 @@
+<?php 
+
+include 'koneksibom.php'; 
+
+// menyimpan data kedalam variabel 
+$datastatus    = $_POST['datastatus'];
+$no_resi       = $_POST['no_resi'];
+
+// query SQL untuk insert data 
+$query="UPDATE pengirim SET 
+datastatus='$datastatus'
+where 
+no_resi='$no_resi'";
+mysqli_query($koneksi, $query); 
+// mengalihkan ke halaman kaiindexpenumpang.php 
+header("location:menukurirbom.php"); 
+?>
