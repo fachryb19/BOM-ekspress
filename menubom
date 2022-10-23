@@ -1,0 +1,52 @@
+<!DOCTYPE html> 
+<html>
+    <head> 
+    <p align="left" style="background-color:beige;">
+        <br><br>
+        <img src="bom.png"/>
+        <br><br>
+    </p>
+    </head> 
+    <body style="background-color:burlywood;font-family:monospace;">
+    <center>
+        <br><br><font size=5pt>Silahkan Masukkan No Resi Anda</font> <br><br>
+        <form action="menubom.php" method="post">
+            <br><br><input type="varchar" name="carinoresi"><br/><br/> 
+            <input style="background-color:beige"; type="submit" value="Cari !"name="cari">
+        </form><br><br><br>
+        <h1>Data Pengiriman</h1>
+        <table border="1" cellspacing="0" width="1000px" height="80px"> 
+            <tr align="center">
+            <th style="font-family:monospace;font-size=24pt">NO</th>
+            <th style="font-family:monospace;font-size=24pt">NO RESI</th>
+            <th style="font-family:monospace;font-size=24pt">NAMA PENGIRIM</th>
+            <th style="font-family:monospace;font-size=24pt">NAMA PENERIMA</th>
+            <th style="font-family:monospace;font-size=24pt">ALAMAT PENERIMA</th>
+            <th style="font-family:monospace;font-size=24pt">JENIS SERVICE</th>
+            <th style="font-family:monospace;font-size=24pt">STATUS</th>
+        <?php
+        if(isset($_POST["cari"]))
+        {
+            $cariresi = $_POST["carinoresi"];
+            include 'koneksibom.php'; 
+            $pengirim = mysqli_query($koneksi, "SELECT no_resi,nama_pengirim,nama_penerima,
+            alamat_penerima,jenis_service,datastatus from pengirim where no_resi=$cariresi"); 
+            $no = 1;
+            foreach ($pengirim as $row) 
+            {
+                echo "<tr>
+                <td>" . $no ."</td> 
+                <td>" . $row['no_resi'] . " </td>
+                <td>" . $row['nama_pengirim'] . "</td> 
+                <td>" . $row['nama_penerima'] . "</td> 
+                <td>" . $row['alamat_penerima'] . "</td> 
+                <td>" . $row['jenis_service'] . "</td>     
+                <td>" . $row['datastatus'] . "</td>
+                </td> </tr>"; 
+                $no++; 
+            }
+        }
+        ?> 
+    </center>
+    </body> 
+</html>
