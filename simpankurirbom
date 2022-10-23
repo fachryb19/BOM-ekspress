@@ -1,0 +1,20 @@
+<?php 
+include 'koneksibom.php'; 
+
+// menyimpan data kedalam variabel 
+$id_kurir         = $_POST['id_kurir']; 
+$nama_kurir       = $_POST['nama_kurir']; 
+$jenis_service    = $_POST['jenis_service']; 
+$kota_tujuan      = $_POST['kota_tujuan'];
+
+// query SQL untuk insert data 
+$query="INSERT INTO kurir SET 
+id_kurir='$id_kurir',
+nama_kurir='$nama_kurir',
+jenis_service='$jenis_service',
+kota_tujuan='$kota_tujuan'";
+
+mysqli_query($koneksi, $query); 
+
+header("location:datakurirbom.php");
+?>
