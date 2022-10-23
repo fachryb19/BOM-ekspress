@@ -1,0 +1,13 @@
+<?php
+    $host       = "localhost";
+    $user       = "root";
+    $password   = "";
+    $database   = "bomexpress";
+    
+    // perintah php untuk akses ke database
+    $koneksi = mysqli_connect($host, $user, $password, $database);
+    if( !$koneksi )
+    {
+        die("Gagal terhubung dengan database BOM EXPRESS " . mysqli_connect_error());
+    }
+?>
