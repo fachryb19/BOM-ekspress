@@ -1,0 +1,36 @@
+<?php 
+include 'koneksibom.php'; 
+
+// menyimpan data kedalam variabel 
+$nama_pengirim    = $_POST['nama_pengirim']; 
+$nohp_pengirim    = $_POST['nohp_pengirim']; 
+$nama_penerima    = $_POST['nama_penerima']; 
+$alamat_penerima  = $_POST['alamat_penerima'];
+$nohp_penerima    = $_POST['nohp_penerima']; 
+$jenis_barang     = $_POST['jenis_barang']; 
+$jenis_service    = $_POST['jenis_service']; 
+$berat_barang     = $_POST['berat_barang'];
+$tanggal_masuk    = $_POST['tanggal_masuk'];
+$no_resi          = $_POST['no_resi'];
+$datastatus       = "on process";
+$kota_tujuan      = $_POST['kota_tujuan'];
+
+// query SQL untuk insert data 
+$query="INSERT INTO pengirim SET 
+nama_pengirim='$nama_pengirim',
+nohp_pengirim='$nohp_pengirim',
+nama_penerima='$nama_penerima ',
+alamat_penerima='$alamat_penerima',
+nohp_penerima='$nohp_penerima',
+jenis_barang='$jenis_barang',
+jenis_service='$jenis_service',
+berat_barang='$berat_barang',
+tanggal_masuk='$tanggal_masuk',
+no_resi='$no_resi',
+datastatus='$datastatus',
+kota_tujuan='$kota_tujuan'";
+
+mysqli_query($koneksi, $query); 
+
+header("location:isidatapengirimbom.php");
+?>
